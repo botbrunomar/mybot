@@ -1,1 +1,2 @@
-& "/workspaces/mybot/.venv/bin/python" "/workspaces/mybot/bot.py"
+.venv\Scripts\Activate.ps1
+&.venv\Scripts\python.exe bot.py

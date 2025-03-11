@@ -14,4 +14,4 @@ This Discord bot generates random payouts based on a predefined structure. It us
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/random-bet-generator-bot.git
+   git clone https://github.com/botbrunomar/mybot.git

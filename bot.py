@@ -1,6 +1,11 @@
 import discord
-from discord.ext import commands
 import random
+import os
+from os import getenv
+from discord.ext import commands
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Define the shorthand notation for large numbers
 multipliers = {
@@ -27,7 +32,10 @@ payouts = [
 ]
 
 # Create a bot instance
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(
+    command_prefix='!',
+    intents=discord.Intents.all()
+)
 
 @bot.event
 async def on_ready():
@@ -45,9 +53,8 @@ async def bet(ctx, amount: str):
     # Find the corresponding payout based on the vote number
     for start, end, multiplier, reward in payouts:
         if start <= vote_number <= end:
-            payout = amount_int * multiplier
+            payout = reward
             await ctx.send(f'Vote Number: {vote_number}\nMultiplier: {multiplier}x\nReward: {payout}\n')
-            break
+            return
 
-# Run the bot
-bot.run('YOUR_BOT_TOKEN')
+bot.run(os.getenv('DISCORD_TOKEN'))

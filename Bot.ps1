@@ -1,0 +1,1 @@
+& "/workspaces/mybot/.venv/bin/python" "/workspaces/mybot/bot.py"

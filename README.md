@@ -15,3 +15,6 @@ This Discord bot generates random payouts based on a predefined structure. It us
 
    ```bash
    git clone https://github.com/botbrunomar/mybot.git
+
+   ```bash
+   pip install -r requirements.txt

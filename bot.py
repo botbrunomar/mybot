@@ -1,60 +1,36 @@
+import os
 import discord
 import random
-import os
-from os import getenv
+
 from discord.ext import commands
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
-# Define the shorthand notation for large numbers
-multipliers = {
-    'k': 1000,
-    'm': 1000000,
-    'g': 1000000000,
-    't': 1000000000000,
-    'p': 1000000000000000,
-    'e': 1000000000000000000,
-    'z': 1000000000000000000000,
-    'y': 1000000000000000000000000
-}
-
-# Define the payout structure
-payouts = [
-    (1, 20, 1, 100000),
-    (21, 21, 3, 300000),
-    (22, 41, 2, 200000),
-    (42, 42, 6, 600000),
-    (43, 62, 3, 300000),
-    (63, 63, 9, 900000),
-    (64, 83, 4, 400000),
-    (84, 84, 12, 1200000)
-]
-
-# Create a bot instance
+# Initialize the bot
 bot = commands.Bot(
-    command_prefix='!',
-    intents=discord.Intents.all()
+    command_prefix='PREFIX',
+    intents = discord.Intents.all()
 )
 
+# Define the on_ready event
 @bot.event
 async def on_ready():
-    print(f'Logged in as {bot.user.name}')
+    win_numbers = {11, 22, 33, 44, 55, 66, 77, 88, 99}
+    if random.randint(1, 100) in win_numbers:
+        print('You Win!')
+    else:
+        print('You Lose!')
 
-@bot.command()
-async def bet(ctx, amount: str):
-    # Convert the shorthand notation to an integer
-    num, suffix = amount[:-1], amount[-1]
-    amount_int = int(num) * multipliers.get(suffix, 1)
+# Define a sample command
+@bot.command(name='play')
+async def play(ctx):
+    win_numbers = {11, 22, 33, 44, 55, 66, 77, 88, 99}
+    if random.randint(1, 100) in win_numbers:
+        await ctx.send('You Win!')
+    else:
+        await ctx.send('You Lose!')
 
-    # Generate a random number for the vote
-    vote_number = random.randint(1, 84)
-
-    # Find the corresponding payout based on the vote number
-    for start, end, multiplier, reward in payouts:
-        if start <= vote_number <= end:
-            payout = reward
-            await ctx.send(f'Vote Number: {vote_number}\nMultiplier: {multiplier}x\nReward: {payout}\n')
-            return
-
-bot.run(os.getenv('DISCORD_TOKEN'))
+# Run the bot
+if __name__ == '__main__':
+    bot.run(os.getenv('TOKEN'))

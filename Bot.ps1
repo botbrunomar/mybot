@@ -1,5 +1,5 @@
-# Start a VS Code remote tunnel
-vscode tunnel &
+ssh -T -D 58786 pigletaccess
 
-# Run the Python script using the virtual environment's Python interpreter
-C:/Users/botbr/Documents/GitHub/mybot/.venv/Scripts/python.exe c:/Users/botbr/Documents/GitHub/mybot/bot.py
+cd "C:\Users\botbr\Documents\GitHub\mybot"
+
+C:\Users\botbr\Documents\GitHub\mybot\.conda\python.exe C:\Users\botbr\Documents\GitHub\mybot\bot.py

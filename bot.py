@@ -13,17 +13,17 @@ bot = commands.Bot(
     intents=discord.Intents.all()
 )
 
-# Define the on_ready event
-@bot.event
+@client.event
 async def on_ready():
-    print(f'Logged in as {bot.user.name} (ID: {bot.user.id})')
-    win_numbers = {11, 22, 33, 44, 55, 66, 77, 88, 99}
-    result = 'You Win!' if random.randint(1, 100) in win_numbers else 'You Lose!'
-    print(result)
+    print(f'We have logged in as {client.user}')
 
-# Run the bot
-if __name__ == '__main__':
-    try:
-        bot.run(os.getenv('TOKEN'))
-    except Exception as e:
-        print(f'Error occurred: {e}')
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('!random'):
+        random_number = random.randint(1, 100)
+        await message.channel.send(f'Your random number is: {random_number}')
+
+client.run(os.getenv('TOKEN'))
